@@ -1,5 +1,5 @@
 name:                  amazonka-route53
-version:               0.3.6
+version:               0.3.6.1
 synopsis:              Amazon Route 53 SDK.
 homepage:              https://github.com/brendanhay/amazonka
 license:               OtherLicense
