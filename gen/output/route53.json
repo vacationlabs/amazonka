@@ -1,23 +1,8 @@
 {
     "waiters": {
-        "waiters": {
-            "ResourceRecordSetsChanged": {
-                "operation": "GetChange",
-                "acceptors": [
-                    {
-                        "matcher": "matchAll",
-                        "state": "success",
-                        "argument": "gcrChangeInfo . ciStatus",
-                        "expected": "Insync"
-                    }
-                ],
-                "maxAttempts": 60,
-                "delay": 30
-            }
-        },
+        "waiters": {},
         "namespace": "Network.AWS.Route53.Waiters",
         "imports": [
-            "Network.AWS.Route53.GetChange",
             "Network.AWS.Route53.Types"
         ]
     },
@@ -60,8 +45,7 @@
             "Network.AWS.Route53.ListTagsForResources",
             "Network.AWS.Route53.Types",
             "Network.AWS.Route53.UpdateHealthCheck",
-            "Network.AWS.Route53.UpdateHostedZoneComment",
-            "Network.AWS.Route53.Waiters"
+            "Network.AWS.Route53.UpdateHostedZoneComment"
         ],
         "name": "Amazon Route 53",
         "version": "2013-04-01",
@@ -136,8 +120,7 @@
             "Network.AWS.Route53.ListTagsForResources",
             "Network.AWS.Route53.Types",
             "Network.AWS.Route53.UpdateHealthCheck",
-            "Network.AWS.Route53.UpdateHostedZoneComment",
-            "Network.AWS.Route53.Waiters"
+            "Network.AWS.Route53.UpdateHostedZoneComment"
         ],
         "url": "http://docs.aws.amazon.com/Route53/latest/APIReference/Welcome.html",
         "protocol": "rest-xml",
@@ -3021,21 +3004,21 @@
                     },
                     {
                         "location": null,
-                        "iso": "_List1",
-                        "lensMapping": "_List1",
-                        "default": "error",
+                        "iso": null,
+                        "lensMapping": "mapping _List1",
+                        "default": "Nothing",
                         "monoid": false,
                         "protocol": "rest-xml",
                         "payload": false,
                         "flattened": false,
-                        "required": true,
+                        "required": false,
                         "lens": "rrsResourceRecords",
                         "name": "_rrsResourceRecords",
                         "shape": "ResourceRecords",
                         "locationName": "ResourceRecords",
                         "documentation": "-- | A complex type that contains the resource records for the current resource\n-- record set.",
-                        "typeExposed": "NonEmpty ResourceRecord",
-                        "type": "List1 \"ResourceRecord\" ResourceRecord"
+                        "typeExposed": "Maybe (NonEmpty ResourceRecord)",
+                        "type": "Maybe (List1 \"ResourceRecord\" ResourceRecord)"
                     },
                     {
                         "location": null,
@@ -3111,24 +3094,6 @@
                         "documentation": "-- | The type of the current resource record set.",
                         "typeExposed": "RecordType",
                         "type": "RecordType"
-                    },
-                    {
-                        "location": null,
-                        "iso": "_List1",
-                        "lensMapping": "_List1",
-                        "default": "error",
-                        "monoid": false,
-                        "protocol": "rest-xml",
-                        "payload": false,
-                        "flattened": false,
-                        "required": true,
-                        "lens": "rrsResourceRecords",
-                        "name": "_rrsResourceRecords",
-                        "shape": "ResourceRecords",
-                        "locationName": "ResourceRecords",
-                        "documentation": "-- | A complex type that contains the resource records for the current resource\n-- record set.",
-                        "typeExposed": "NonEmpty ResourceRecord",
-                        "type": "List1 \"ResourceRecord\" ResourceRecord"
                     }
                 ],
                 "contentPad": 16,
@@ -3243,6 +3208,24 @@
                         "documentation": "-- | The cache time to live for the current resource record set.",
                         "typeExposed": "Maybe Natural",
                         "type": "Maybe Nat"
+                    },
+                    {
+                        "location": null,
+                        "iso": null,
+                        "lensMapping": "mapping _List1",
+                        "default": "Nothing",
+                        "monoid": false,
+                        "protocol": "rest-xml",
+                        "payload": false,
+                        "flattened": false,
+                        "required": false,
+                        "lens": "rrsResourceRecords",
+                        "name": "_rrsResourceRecords",
+                        "shape": "ResourceRecords",
+                        "locationName": "ResourceRecords",
+                        "documentation": "-- | A complex type that contains the resource records for the current resource\n-- record set.",
+                        "typeExposed": "Maybe (NonEmpty ResourceRecord)",
+                        "type": "Maybe (List1 \"ResourceRecord\" ResourceRecord)"
                     },
                     {
                         "location": null,
@@ -3392,21 +3375,21 @@
                     },
                     {
                         "location": null,
-                        "iso": "_List1",
-                        "lensMapping": "_List1",
-                        "default": "error",
+                        "iso": null,
+                        "lensMapping": "mapping _List1",
+                        "default": "Nothing",
                         "monoid": false,
                         "protocol": "rest-xml",
                         "payload": false,
                         "flattened": false,
-                        "required": true,
+                        "required": false,
                         "lens": "rrsResourceRecords",
                         "name": "_rrsResourceRecords",
                         "shape": "ResourceRecords",
                         "locationName": "ResourceRecords",
                         "documentation": "-- | A complex type that contains the resource records for the current resource\n-- record set.",
-                        "typeExposed": "NonEmpty ResourceRecord",
-                        "type": "List1 \"ResourceRecord\" ResourceRecord"
+                        "typeExposed": "Maybe (NonEmpty ResourceRecord)",
+                        "type": "Maybe (List1 \"ResourceRecord\" ResourceRecord)"
                     },
                     {
                         "location": null,

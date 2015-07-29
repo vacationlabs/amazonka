@@ -236,6 +236,7 @@ instance AWSService Route53 where
               -> Bool
         check (statusCode -> s) (awsErrorCode -> e)
             | s == 400 && (Just "Throttling") == e = True -- Throttling
+            | s == 400 && (Just "ThrottlingException") == e = True -- Throttling Exception
             | s == 500  = True -- General Server Error
             | s == 509  = True -- Limit Exceeded
             | s == 503  = True -- Service Unavailable
@@ -1278,7 +1279,7 @@ data ResourceRecordSet = ResourceRecordSet
     , _rrsHealthCheckId   :: Maybe Text
     , _rrsName            :: Text
     , _rrsRegion          :: Maybe Region
-    , _rrsResourceRecords :: List1 "ResourceRecord" ResourceRecord
+    , _rrsResourceRecords :: Maybe (List1 "ResourceRecord" ResourceRecord)
     , _rrsSetIdentifier   :: Maybe Text
     , _rrsTTL             :: Maybe Nat
     , _rrsType            :: RecordType
@@ -1301,7 +1302,7 @@ data ResourceRecordSet = ResourceRecordSet
 --
 -- * 'rrsRegion' @::@ 'Maybe' 'Region'
 --
--- * 'rrsResourceRecords' @::@ 'NonEmpty' 'ResourceRecord'
+-- * 'rrsResourceRecords' @::@ 'Maybe' ('NonEmpty' 'ResourceRecord')
 --
 -- * 'rrsSetIdentifier' @::@ 'Maybe' 'Text'
 --
@@ -1313,18 +1314,17 @@ data ResourceRecordSet = ResourceRecordSet
 --
 resourceRecordSet :: Text -- ^ 'rrsName'
                   -> RecordType -- ^ 'rrsType'
-                  -> NonEmpty ResourceRecord -- ^ 'rrsResourceRecords'
                   -> ResourceRecordSet
-resourceRecordSet p1 p2 p3 = ResourceRecordSet
+resourceRecordSet p1 p2 = ResourceRecordSet
     { _rrsName            = p1
     , _rrsType            = p2
-    , _rrsResourceRecords = withIso _List1 (const id) p3
     , _rrsSetIdentifier   = Nothing
     , _rrsWeight          = Nothing
     , _rrsRegion          = Nothing
     , _rrsGeoLocation     = Nothing
     , _rrsFailover        = Nothing
     , _rrsTTL             = Nothing
+    , _rrsResourceRecords = Nothing
     , _rrsAliasTarget     = Nothing
     , _rrsHealthCheckId   = Nothing
     }
@@ -1375,10 +1375,10 @@ rrsRegion = lens _rrsRegion (\s a -> s { _rrsRegion = a })
 
 -- | A complex type that contains the resource records for the current resource
 -- record set.
-rrsResourceRecords :: Lens' ResourceRecordSet (NonEmpty ResourceRecord)
+rrsResourceRecords :: Lens' ResourceRecordSet (Maybe (NonEmpty ResourceRecord))
 rrsResourceRecords =
     lens _rrsResourceRecords (\s a -> s { _rrsResourceRecords = a })
-        . _List1
+        . mapping _List1
 
 -- | /Weighted, Latency, Geo, and Failover resource record sets only:/ An identifier
 -- that differentiates among multiple resource record sets that have the same
@@ -1409,7 +1409,7 @@ instance FromXML ResourceRecordSet where
         <*> x .@? "HealthCheckId"
         <*> x .@  "Name"
         <*> x .@? "Region"
-        <*> x .@  "ResourceRecords"
+        <*> x .@? "ResourceRecords"
         <*> x .@? "SetIdentifier"
         <*> x .@? "TTL"
         <*> x .@  "Type"
