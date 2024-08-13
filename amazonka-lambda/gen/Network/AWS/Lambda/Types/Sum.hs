@@ -145,7 +145,7 @@ data Runtime
   | PYTHON2_7
   | PYTHON3_6
   | PYTHON3_7
-  | Provided
+  | Provided_al2
   | RUBY2_5
   deriving (Eq, Ord, Read, Show, Enum, Bounded, Data, Typeable, Generic)
 
@@ -169,7 +169,7 @@ instance FromText Runtime where
         "provided.al2" -> pure Provided_al2
         "ruby2.5" -> pure RUBY2_5
         e -> fromTextError $ "Failure parsing Runtime from value: '" <> e
-           <> "'. Accepted values: dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, go1.x, java8, nodejs10.x, nodejs4.3, nodejs4.3-edge, nodejs6.10, nodejs8.10, nodejs, python2.7, python3.6, python3.7, provided, ruby2.5"
+           <> "'. Accepted values: dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, go1.x, java8, nodejs10.x, nodejs4.3, nodejs4.3-edge, nodejs6.10, nodejs8.10, nodejs, python2.7, python3.6, python3.7, provided, ruby2.5, provided.al2"
 
 instance ToText Runtime where
     toText = \case
