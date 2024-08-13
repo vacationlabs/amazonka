@@ -187,7 +187,7 @@ instance ToText Runtime where
         PYTHON2_7 -> "python2.7"
         PYTHON3_6 -> "python3.6"
         PYTHON3_7 -> "python3.7"
-        Provided -> "provided"
+        Provided_al2 -> "provided.al2"
         RUBY2_5 -> "ruby2.5"
 
 instance Hashable     Runtime
