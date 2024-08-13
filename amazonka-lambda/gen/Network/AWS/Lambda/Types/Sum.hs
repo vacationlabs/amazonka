@@ -166,7 +166,7 @@ instance FromText Runtime where
         "python2.7" -> pure PYTHON2_7
         "python3.6" -> pure PYTHON3_6
         "python3.7" -> pure PYTHON3_7
-        "provided" -> pure Provided
+        "provided.al2" -> pure Provided_al2
         "ruby2.5" -> pure RUBY2_5
         e -> fromTextError $ "Failure parsing Runtime from value: '" <> e
            <> "'. Accepted values: dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, go1.x, java8, nodejs10.x, nodejs4.3, nodejs4.3-edge, nodejs6.10, nodejs8.10, nodejs, python2.7, python3.6, python3.7, provided, ruby2.5"
