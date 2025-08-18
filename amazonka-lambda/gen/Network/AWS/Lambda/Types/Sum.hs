@@ -145,6 +145,7 @@ data Runtime
   | PYTHON2_7
   | PYTHON3_6
   | PYTHON3_7
+  | Provided_al2023
   | Provided_al2
   | Provided
   | RUBY2_5
@@ -167,6 +168,7 @@ instance FromText Runtime where
         "python2.7" -> pure PYTHON2_7
         "python3.6" -> pure PYTHON3_6
         "python3.7" -> pure PYTHON3_7
+        "provided.al2023" -> pure Provided_al2023
         "provided.al2" -> pure Provided_al2
         "provided" -> pure Provided
         "ruby2.5" -> pure RUBY2_5
@@ -189,6 +191,7 @@ instance ToText Runtime where
         PYTHON2_7 -> "python2.7"
         PYTHON3_6 -> "python3.6"
         PYTHON3_7 -> "python3.7"
+        Provided_al2023 -> "provided.al2023"
         Provided_al2 -> "provided.al2"
         Provided -> "provided"
         RUBY2_5 -> "ruby2.5"
